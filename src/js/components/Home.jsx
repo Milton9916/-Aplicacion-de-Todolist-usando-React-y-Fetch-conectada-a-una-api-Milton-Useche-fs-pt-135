@@ -162,6 +162,27 @@ const Home = () => {
 	}
 
 
+	const checkTarea = async (id, isDoneactual)=>{
+		try {
+			const newIsDone = !isDoneactual
+			const res = await fetch(`${URL}/todos/${id}`,{
+				method: `PUT`,
+				body:JSON.stringify({
+					is_done: newIsDone
+				}),
+				headers: {
+					"Content-Type": "application/json"
+				}
+			})
+
+			getData()
+
+		} catch (err) {
+			console.log(`ERROR: `,err)
+		}
+	}
+
+
 	//Contar tarjetas
 	const contar = list.length === 0 
       ? "No tienes ningun item"
@@ -177,6 +198,7 @@ const Home = () => {
 			key={elemento.id}
 			id={elemento.id}
 			content={elemento.label}
+			isDone={elemento.is_done}
 			eliminar={() => eliminar(elemento.id)}
 			editarId={editarId}
 			editar={() => editar(elemento.id, elemento.label)}
@@ -184,6 +206,7 @@ const Home = () => {
 			setEditarTexto={setEditarTexto}
 			setEditarId={setEditarId}
 			actualizar={actualizar}
+			checkTarea={() => checkTarea(elemento.id, elemento.is_done)}
 			 />
 		)
 	})

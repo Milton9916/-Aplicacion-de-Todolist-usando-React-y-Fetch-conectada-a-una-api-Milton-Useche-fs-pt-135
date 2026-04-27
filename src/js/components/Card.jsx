@@ -9,9 +9,8 @@ export const Card = (props)=>{
                     <div className="col-12 col-lg-12">
                         <div className="card ocultar">
                             <div className="row">
-
                                 { /* CONTENIDO */ }
-                                <div className="col-8">
+                                <div className="col-9">
                                     <input
                                         type="text"
                                         className="bentham-regular input-sin-borde"
@@ -31,14 +30,21 @@ export const Card = (props)=>{
                                 </div>
 
                                 { /* Actualizar */ }
-                                <div className="col-2 delete d-flex justifi-content-center align-items-center">
+                                <div className="col-1 delete d-flex justifi-content-center align-items-center">
                                     <a href="#" className="bentham-regular fs-4" onClick={props.editar}>
                                         <i className="bi bi-pencil"></i>
                                     </a>
                                 </div>
 
+                                { /* Check */ }
+                                <div className="col-1 delete d-flex justifi-content-center align-items-center">
+                                    <a href="#" className="bentham-regular fs-4" onClick={props.checkTarea}>
+                                        <i>{props.isDone === true ? "✅" : "❌"}</i>
+                                    </a>
+                                </div>
+
                                 { /* ElIMINAR */ }
-                                <div className="col-2 delete d-flex justifi-content-center align-items-center">
+                                <div className="col-1 delete d-flex justifi-content-center align-items-center">
                                     <a href="#" className="bentham-regular fs-4" onClick={props.eliminar}>
                                         <i className="bi bi-trash"></i>
                                     </a>
@@ -47,9 +53,7 @@ export const Card = (props)=>{
                         </div>
                     </div>
                 </div>
-
             </div>
-            
         </>
     )
 };
@@ -57,11 +61,13 @@ export const Card = (props)=>{
 Card.propTypes = {
   id: PropTypes.number,
   content: PropTypes.string,
+  eliminar: PropTypes.func,
+  editar: PropTypes.func,
   editarId: PropTypes.number,
   editarTexto: PropTypes.string,
   setEditarTexto: PropTypes.func,
   setEditarId: PropTypes.func,
   actualizar: PropTypes.func,
-  editar: PropTypes.func,
-  eliminar: PropTypes.func
+  checkTarea: PropTypes.func,
+  isDone: PropTypes.bool
 };
